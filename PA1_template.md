@@ -77,6 +77,7 @@ na.count
 ```
 
 ### Create a new dataset that is equal to the original dataset but with the missing data filled in.
+#### Replace NA by mean
 
 ```r
 avg_steps_by_interval <- aggregate(steps ~ interval, data = df.activity, FUN = mean)
@@ -129,6 +130,7 @@ step.median.imputed
 
 ## Are there differences in activity patterns between weekdays and weekends?
 ### Create a new factor variable in the dataset with two levels – “weekday” and “weekend” indicating whether a given date is a weekday or weekend day.
+####Using Weekdays function in order to get the literal for the day of the week, then using if then to flag it as a weekend of a weekday
 
 ```r
 df.activity.imputed$date <- as.Date(df.activity.imputed$date, "%Y-%m-%d")
@@ -149,7 +151,7 @@ df.activity.imputed$day_type <- factor(df.activity.imputed$day_type)
 avg_steps_by_interval <- aggregate(steps ~ interval + day_type, data = df.activity.imputed, mean)
 names(avg_steps_by_interval) <- c("interval", "day_type", "steps")
 ```
-
+####Used xyplot from lattice package to display
 
 ```r
 library(lattice)
